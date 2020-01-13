@@ -10,6 +10,17 @@
   </head>
 
   <body>
+    <% if logged_in? %>
+      <form action="<%= session_url %>" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        <button>Log Out</button>
+      </form>
+    <% else %>
+      <% unless params[:controller] == 'sessions' %>
+        <a href="<%= new_session_url %>">Log In</a>
+      <% end %>
+      <a href="<%= new_user_url %>">Create User</a>
+    <% end %>
 
     <%= flash[:success] %>
     <%= flash[:error] %>
