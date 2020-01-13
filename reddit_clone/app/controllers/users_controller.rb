@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  skip_before_action :verify_authenticity_token
+  # skip_before_action :verify_authenticity_token
   before_action :ensure_logged_in, only: [:show]
 
   def index
@@ -20,6 +20,7 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:success] = ['User has been created']
+      log_in!(@user)
       redirect_to user_url(@user)
     else  
       flash.now[:error] = @user.errors.full_messages

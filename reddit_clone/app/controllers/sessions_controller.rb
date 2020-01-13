@@ -14,8 +14,9 @@ class SessionsController < ApplicationController
     )
 
     if @user
+      flash[:success] = ["Welcome back #{@user.username}"]
       log_in!(@user)
-      redirect_to users_url
+      redirect_to user_url(@user)
     else
       flash.now[:error] = ["Invalid username or password. Try again"]
       render :new
